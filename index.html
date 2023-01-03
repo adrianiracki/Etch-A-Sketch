@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-A-Sketch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Etch-A-Sketch</h1>
+    <script>
+        const container = document.createElement('div');
+        document.body.appendChild(container);
+        container.classList.add('container');
+        let divs = document.querySelectorAll('.container > div');
+
+        let size = 16;
+        makeGrid(size);
+
+        function makeGrid(size) {
+            for (i = 0; i < size ** 2; i++) {
+                const div = document.createElement('div');
+                container.appendChild(div);
+            }
+            container.setAttribute('style', `grid-template-columns: repeat(${size}, ${960/size}px)`, `grid-template-rows: repeat(${size}, ${960/size}px)`);
+            divs.forEach(div => div.setAttribute('style', 'background-color: black'))
+        };
+
+        let toggle = false;
+
+        container.addEventListener('mousedown', () => {
+            event.target.setAttribute('style', 'background-color: white');
+            toggle = true;
+        });
+
+        container.addEventListener('mouseup', () => {
+            toggle = false;
+        });
+
+        container.addEventListener('mouseover', (event) => {
+            if (toggle === true) {
+            event.target.setAttribute('style', 'background-color: white');
+            }});
+        
+    </script>
+</body>
+</html>
