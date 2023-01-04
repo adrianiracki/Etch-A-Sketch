@@ -31,8 +31,12 @@
             }
             container.setAttribute('style', `grid-template-columns: repeat(${size}, ${960/size}px)`, `grid-template-rows: repeat(${size}, ${960/size}px)`);
             divs = document.querySelectorAll('div.container div');
+            
+            divs.forEach((div) => {
+                div.style.backgroundColor = 'black';
+                div.style.opacity = 0;
+            });
        
-
             let toggle = false;
 
             divs.forEach(div => div.addEventListener('mousedown', (event) => {
@@ -51,7 +55,6 @@
                     event.preventDefault();
                     draw();
                 }}));
-
         };
 
         function draw() {
@@ -107,10 +110,6 @@
         shadingModeButton.addEventListener('click', (event) => {
             colorMode = false;
             shadingMode = true;
-            divs.forEach((div) => {
-                div.style.backgroundColor = 'black';
-                div.style.opacity = 0;
-            });
             event.target.classList.add('activeButton');
             BWModeButton.classList.remove('activeButton');
             colorModeButton.classList.remove('activeButton');
