@@ -12,6 +12,8 @@
     <div class="buttons">
     <button id="newGrid">Make a new grid</button>
     <button id="colorMode">Color mode</button>
+    <button id="blackWhiteMode">Black & white mode</button>
+
     </div>
     <script>
         const container = document.createElement('div');
@@ -32,14 +34,13 @@
 
         let toggle = false;
 
-        container.addEventListener('mousedown', () => {
+        container.addEventListener('mousedown', (event) => {
             event.preventDefault();
-            // event.target.setAttribute('style', `background-color: ${randomRGBValue()}`);
             draw();
             toggle = true;
         });
 
-        container.addEventListener('mouseup', () => {
+        container.addEventListener('mouseup', (event) => {
             event.preventDefault();
             toggle = false;
         });
@@ -47,9 +48,15 @@
         container.addEventListener('mouseover', (event) => {
             if (toggle === true) {
                 event.preventDefault();
-                // event.target.setAttribute('style', `background-color: ${randomRGBValue()}`);
                 draw();
             }});
+
+        function draw() {
+            if(colorMode === true) {
+                event.target.setAttribute('style', `background-color: ${randomRGBValue()}`)
+            } else { 
+                event.target.setAttribute('style', `background-color: white`)}
+        };
 
         let newGridButton = document.querySelector('#newGrid');
         newGridButton.onclick = () => {
@@ -68,19 +75,24 @@
             return rgb;
         };
 
-        function draw() {
-            if(colorMode === true) {
-                event.target.setAttribute('style', `background-color: ${randomRGBValue()}`)
-            } else { 
-                event.target.setAttribute('style', `background-color: white`)}
-        };
-
         let colorMode = false;
         const colorModeButton = document.querySelector('#colorMode')
         colorModeButton.addEventListener('click', (event) => {
             colorMode = true;
-            event.target.classList.add('activeButton')
+            event.target.classList.add('activeButton');
+            BWModeButton.classList.remove('activeButton');
         });
+
+        const BWModeButton = document.querySelector('#blackWhiteMode')
+        BWModeButton.addEventListener('click', (event) => {
+            colorMode = false;
+            event.target.classList.add('activeButton');
+            colorModeButton.classList.remove('activeButton');
+        });
+        
+
+
+        
 
 
         
