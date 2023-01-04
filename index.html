@@ -13,6 +13,7 @@
     <button id="newGrid">Make a new grid</button>
     <button id="colorMode">Color mode</button>
     <button id="blackWhiteMode">Black & white mode</button>
+    <button id="shadingMode">Shading mode</button>
 
     </div>
     <script>
@@ -54,8 +55,12 @@
         function draw() {
             if(colorMode === true) {
                 event.target.setAttribute('style', `background-color: ${randomRGBValue()}`)
+            } else if (shadingMode === true) {
+                let opacity = +(event.target.style.opacity);
+                event.target.style.opacity = `${opacity + 0.1}`;
+                console.log(opacity)
             } else { 
-                event.target.setAttribute('style', `background-color: white`)}
+                event.target.setAttribute('style', `background-color: black`)}
         };
 
         let newGridButton = document.querySelector('#newGrid');
@@ -79,23 +84,37 @@
         const colorModeButton = document.querySelector('#colorMode')
         colorModeButton.addEventListener('click', (event) => {
             colorMode = true;
+            shadingMode = false;
             event.target.classList.add('activeButton');
             BWModeButton.classList.remove('activeButton');
+            shadingModeButton.classList.remove('activeButton');
         });
 
         const BWModeButton = document.querySelector('#blackWhiteMode')
         BWModeButton.addEventListener('click', (event) => {
             colorMode = false;
+            shadingMode = false;
             event.target.classList.add('activeButton');
             colorModeButton.classList.remove('activeButton');
+            shadingModeButton.classList.remove('activeButton');
         });
         
+        let shadingMode = false;
+        let alpha = 0;
+        const shadingModeButton = document.querySelector('#shadingMode')
+        shadingModeButton.addEventListener('click', (event) => {
+            colorMode = false;
+            shadingMode = true;
+            divs.forEach((div) => {
+                div.style.backgroundColor = 'black';
+                div.style.opacity = 0;
+            });
+            event.target.classList.add('activeButton');
+            BWModeButton.classList.remove('activeButton');
+            colorModeButton.classList.remove('activeButton');
+        });
 
 
-        
-
-
-        
     </script>
 </body>
 </html>

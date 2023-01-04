@@ -1,9 +1,10 @@
 .container {
     display: grid;
-    background-color: black;
+    background-color: white;
     width: 960px;
     height: 960px;
     margin: auto;
+    border: solid black 5px;
 }
 
 h1 {
