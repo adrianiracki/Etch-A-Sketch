@@ -9,7 +9,10 @@
 </head>
 <body>
     <h1>Etch-A-Sketch</h1>
-    <button>Make a new grid</button>
+    <div class="buttons">
+    <button id="newGrid">Make a new grid</button>
+    <button id="colorMode">Color mode</button>
+    </div>
     <script>
         const container = document.createElement('div');
         document.body.appendChild(container);
@@ -30,27 +33,56 @@
         let toggle = false;
 
         container.addEventListener('mousedown', () => {
-            event.target.setAttribute('style', 'background-color: white');
+            event.preventDefault();
+            // event.target.setAttribute('style', `background-color: ${randomRGBValue()}`);
+            draw();
             toggle = true;
         });
 
         container.addEventListener('mouseup', () => {
+            event.preventDefault();
             toggle = false;
         });
 
         container.addEventListener('mouseover', (event) => {
             if (toggle === true) {
-            event.target.setAttribute('style', 'background-color: white');
+                event.preventDefault();
+                // event.target.setAttribute('style', `background-color: ${randomRGBValue()}`);
+                draw();
             }});
 
-        let button = document.querySelector('button');
-        button.onclick = () => {
+        let newGridButton = document.querySelector('#newGrid');
+        newGridButton.onclick = () => {
             size = +prompt('Enter the number of squares per side: (1-100)');
             if(size < 1 || size > 100 || isNaN(size) === true) alert('Enter a proper value from 1 to 100')
             else {
             divs.forEach((div) => div.remove());
             makeGrid(size);
         }};
+
+        function randomRGBValue() {
+            let r = Math.floor(Math.random() * 255);
+            let g = Math.floor(Math.random() * 255);
+            let b = Math.floor(Math.random() * 255);
+            let rgb = `rgb(${r}, ${g}, ${b})`;
+            return rgb;
+        };
+
+        function draw() {
+            if(colorMode === true) {
+                event.target.setAttribute('style', `background-color: ${randomRGBValue()}`)
+            } else { 
+                event.target.setAttribute('style', `background-color: white`)}
+        };
+
+        let colorMode = false;
+        const colorModeButton = document.querySelector('#colorMode')
+        colorModeButton.addEventListener('click', (event) => {
+            colorMode = true;
+            event.target.classList.add('activeButton')
+        });
+
+
         
     </script>
 </body>
