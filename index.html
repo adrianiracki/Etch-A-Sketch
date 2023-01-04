@@ -9,12 +9,12 @@
 </head>
 <body>
     <h1>Etch-A-Sketch</h1>
+    <button>Make a new grid</button>
     <script>
         const container = document.createElement('div');
         document.body.appendChild(container);
         container.classList.add('container');
-        let divs = document.querySelectorAll('.container > div');
-
+        let divs;
         let size = 16;
         makeGrid(size);
 
@@ -24,7 +24,7 @@
                 container.appendChild(div);
             }
             container.setAttribute('style', `grid-template-columns: repeat(${size}, ${960/size}px)`, `grid-template-rows: repeat(${size}, ${960/size}px)`);
-            divs.forEach(div => div.setAttribute('style', 'background-color: black'))
+            divs = document.querySelectorAll('div.container div');
         };
 
         let toggle = false;
@@ -42,6 +42,13 @@
             if (toggle === true) {
             event.target.setAttribute('style', 'background-color: white');
             }});
+
+        let button = document.querySelector('button');
+        button.onclick = () => {
+            size = +prompt('Enter the number of squares per side:');
+            divs.forEach((div) => div.remove());
+            makeGrid(size);
+        }
         
     </script>
 </body>
