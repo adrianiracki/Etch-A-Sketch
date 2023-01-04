@@ -31,34 +31,37 @@
             }
             container.setAttribute('style', `grid-template-columns: repeat(${size}, ${960/size}px)`, `grid-template-rows: repeat(${size}, ${960/size}px)`);
             divs = document.querySelectorAll('div.container div');
-        };
+       
 
-        let toggle = false;
+            let toggle = false;
 
-        container.addEventListener('mousedown', (event) => {
-            event.preventDefault();
-            draw();
-            toggle = true;
-        });
-
-        container.addEventListener('mouseup', (event) => {
-            event.preventDefault();
-            toggle = false;
-        });
-
-        container.addEventListener('mouseover', (event) => {
-            if (toggle === true) {
+            divs.forEach(div => div.addEventListener('mousedown', (event) => {
                 event.preventDefault();
                 draw();
-            }});
+                toggle = true;
+            }));
+
+            divs.forEach(div => div.addEventListener('mouseup', (event) => {
+                event.preventDefault();
+                toggle = false;
+            }));
+
+            divs.forEach(div => div.addEventListener('mouseover', (event) => {
+                if (toggle === true) {
+                    event.preventDefault();
+                    draw();
+                }}));
+
+        };
 
         function draw() {
             if(colorMode === true) {
                 event.target.setAttribute('style', `background-color: ${randomRGBValue()}`)
+            
             } else if (shadingMode === true) {
                 let opacity = +(event.target.style.opacity);
                 event.target.style.opacity = `${opacity + 0.1}`;
-                console.log(opacity)
+            
             } else { 
                 event.target.setAttribute('style', `background-color: black`)}
         };
@@ -100,7 +103,6 @@
         });
         
         let shadingMode = false;
-        let alpha = 0;
         const shadingModeButton = document.querySelector('#shadingMode')
         shadingModeButton.addEventListener('click', (event) => {
             colorMode = false;
