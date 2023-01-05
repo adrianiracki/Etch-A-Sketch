@@ -14,8 +14,8 @@
     <button id="colorMode">Color mode</button>
     <button id="blackWhiteMode">Black & white mode</button>
     <button id="shadingMode">Shading mode</button>
-
     </div>
+
     <script>
         const container = document.createElement('div');
         document.body.appendChild(container);
@@ -25,7 +25,7 @@
         makeGrid(size);
 
         function makeGrid(size) {
-            for (i = 0; i < size ** 2; i++) {
+            for (let i = 0; i < size ** 2; i++) {
                 const div = document.createElement('div');
                 container.appendChild(div);
             }
@@ -117,5 +117,6 @@
 
 
     </script>
+    <p style = 'text-align:center'>Click and drag to draw.</p>
 </body>
 </html>
